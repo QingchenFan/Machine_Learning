@@ -1,4 +1,9 @@
 #coding:utf-8
+'''
+@author:fanqingchen
+date:2022-03-21
+Machine Learn：Decision Tree
+'''
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -46,11 +51,14 @@ for i in range(15):
     data.append(tmp)        #这样data列表里全为数字
 data = np.array(data)       #将数字列表转换成矩阵形式
 
+#Mark
 print(data,data.shape)
 
 X, y = data[:,:-1], data[:, -1] #X为训练集，y为标签
-print('label:',y)
 
+#Mark
+print('label:',y)
+print(set(y),type(y))
 # 熵
 def entropy(y):
     N = len(y)
@@ -58,8 +66,13 @@ def entropy(y):
     for value in set(y):
         count.append(len(y[y == value]))
     count = np.array(count)
+    #print('count:',count)
     entro = -np.sum((count / N) * (np.log2(count / N)))
+    #print('entro:',entro)
     return entro
+
+entropy(y)
+print('熵:',entropy(y))
 
 # 条件熵
 def cond_entropy(X, y, cond):
@@ -125,11 +138,6 @@ majorityCnt(y)
 
 
 # #### ID3, C4.5算法
-#
-# 例5.3
-
-# In[ ]:
-
 
 class DecisionTreeClassifer:
     """
@@ -210,8 +218,8 @@ clf.predict(np.array([2, 0, 1, 2]).reshape(1,-1)) # B
 clf.predict(np.array([2, 1, 0, 1]).reshape(1,-1)) # C
 
 
-tree_pic = export_graphviz(clf, out_file="mytree.pdf")
-with open('mytree.pdf') as f:
-    dot_graph = f.read()
+#tree_pic = export_graphviz(clf, out_file="mytree.pdf")
+#with open('mytree.pdf') as f:
+#    dot_graph = f.read()
 
-graphviz.Source(dot_graph)
+#graphviz.Source(dot_graph)
